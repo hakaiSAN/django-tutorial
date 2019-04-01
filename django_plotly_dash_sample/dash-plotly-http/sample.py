@@ -21,8 +21,8 @@ app.layout = html.Div(children=[
             html.H4('System Monitor'),
             html.Div(id='live-update-text'),
             dcc.Graph(id='live-update-graph'),
-            html.H4('Process List'),
-            html.Div(id='live-update-proc'),
+#            html.H4('Process List'),
+#            html.Div(id='live-update-proc'),
             dcc.Interval(
                 id='interval-component',
                 interval=1 * 1000,  # in milliseconds
@@ -37,7 +37,7 @@ class Context:
     def __init__(self):
         self.t = []
         self.cpu = []
-        self.per_cpu = [[] for x in range(psutil.cpu_count())]
+#        self.per_cpu = [[] for x in range(psutil.cpu_count())]
         self.mem = []
 
     @classmethod
@@ -73,8 +73,8 @@ def update_graph_live(n):
     # global context
     context.append_data(context.t, datetime.datetime.now())
     context.append_data(context.cpu, psutil.cpu_percent())
-    for data, pct in zip(context.per_cpu, psutil.cpu_percent(percpu=True)):
-        context.append_data(data, pct)
+#    for data, pct in zip(context.per_cpu, psutil.cpu_percent(percpu=True)):
+#        context.append_data(data, pct)
     context.append_data(context.mem, psutil.virtual_memory().percent)
 
     # Create the graph with subplots
@@ -96,26 +96,28 @@ def update_graph_live(n):
         'mode': 'lines',
         'type': 'scatter',
     }, 1, 1)
-    for i, y in enumerate(context.per_cpu):
-        fig.append_trace({
-            'x': context.t,
-            'y': y,
-            'name': 'cpu {}'.format(i),
-            'mode': 'lines',
-            'type': 'scatter',
-        }, 1, 1)
-        fig.append_trace({
-            'x': context.t,
-            'y': context.mem,
-            'name': 'memory',
-            'mode': 'lines',
-            'type': 'scatter',
-            'fill': 'tonexty',
-        }, 2, 1)
+
+#    for i, y in enumerate(context.per_cpu):
+#        fig.append_trace({
+#            'x': context.t,
+#            'y': y,
+#            'name': 'cpu {}'.format(i),
+#            'mode': 'lines',
+#            'type': 'scatter',
+#        }, 1, 1)
+    fig.append_trace({
+      'x': context.t,
+      'y': context.mem,
+      'name': 'memory',
+      'mode': 'lines',
+      'type': 'scatter',
+      'fill': 'tonexty',
+    }, 2, 1)
 
     return fig
 
 
+'''
 def get_proc_df():
     def get_proc(proc):
         try:
@@ -131,7 +133,6 @@ def get_proc_df():
     df['cpu'] = df['cpu'].map(lambda x: '{:.2f}%'.format(x))
     return df.sort_values('cpu', ascending=False)
 
-
 @app.callback(Output('live-update-proc', 'children'),
                 [Input('interval-component', 'n_intervals')])
 def generate_table(n):
@@ -145,6 +146,7 @@ def generate_table(n):
         html.Td(df.iloc[i][col], style={'width': '8em'}) for col in df.columns
         ]) for i in range(min(len(df), max_rows))]
     )
+'''
 
 if __name__ == '__main__':
     app.run_server(debug=True)

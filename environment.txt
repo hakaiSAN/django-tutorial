@@ -6,7 +6,7 @@ sudo apt-get install postgresql postgresql-contrib
 sudo apt-get install python-psycopg2
 sudo apt-get install libgraphviz-dev graphviz pkg-config
 
-pip3.6 install psycopg2 psutil matplotlib python3-tk plotly==2.0.0 channels daphne redis django-redis channels-redis
+pip3.6 install dash dash-core-components dash-html-components dpd-components dash-bootstrap-components psycopg2 psutil python3-tk plotly==2.0.0 channels daphne redis django-redis channels-redis
 
 #https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
 
