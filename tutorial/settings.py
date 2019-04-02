@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'channels',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_plotly_dash.middleware.BaseMiddleware',
 ]
 
 ROOT_URLCONF = 'tutorial.urls'
@@ -72,6 +76,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'tutorial.wsgi.application'
+ASGI_APPLICATION = 'tutorial.routing.application'
 
 
 # Database
@@ -121,8 +126,33 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Plotly dash settings
+
+PLOTLY_DASH = {
+    "ws_route" : "ws/channel",
+
+    "insert_demo_migrations" : True,  # Insert model instances used by the demo
+
+    "http_poke_enabled" : True, # Flag controlling availability of direct-to-messaging http endpoint
+
+    "view_decorator" : None, # Specify a function to be used to wrap each of the dpd view functions
+
+    "cache_arguments" : True, # True for cache, False for session-based argument propagation
+    }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Plotly components containing static content that should
+# be handled by the Django staticfiles infrastructure
+
+PLOTLY_COMPONENTS = [
+    'dash_core_components',
+    'dash_html_components',
+    'dash_bootstrap_components',
+    'dash_renderer',
+    'dpd_components',
+]
+

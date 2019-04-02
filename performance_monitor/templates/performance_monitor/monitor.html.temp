@@ -1,3 +1,4 @@
+{%extends "base.html"%}
 {%load plotly_dash%}
 
 {%block title%}Demo One - Simple Embedding{%endblock%}
