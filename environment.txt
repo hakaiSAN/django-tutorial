@@ -6,7 +6,12 @@ sudo apt-get install postgresql postgresql-contrib
 sudo apt-get install python-psycopg2
 sudo apt-get install libgraphviz-dev graphviz pkg-config
 
-pip3.6 install dash dash-core-components dash-html-components dpd-components dash-bootstrap-components psycopg2 psutil python3-tk plotly==2.0.0 channels daphne redis django-redis channels-redis
+#For Mac
+#http://macappstore.org/shellinabox/
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+brew install postgresql shellinabox
+
+pip3.6 install dash dash-core-components dash-html-components dpd-components dash-bootstrap-components psycopg2 psutil python3-tk plotly==2.0.0 channels daphne redis django-redis channels-redis numpy pandas
 
 #https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
 

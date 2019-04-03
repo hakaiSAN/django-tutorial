@@ -1,0 +1,1 @@
+shellinaboxd --localhost-only --css=`pwd`/shellinabox/white-on-black.css
