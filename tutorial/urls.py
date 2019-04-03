@@ -22,4 +22,5 @@ urlpatterns = [
     path('test_botton/', include('test_botton.urls')),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
+    path('channelChat/', include('channelChat.urls')),
 ]
